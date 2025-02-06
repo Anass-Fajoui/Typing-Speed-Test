@@ -30,12 +30,15 @@
         <div class="title">Typing Speed Test Game</div>
         <div class="select-container">
             <div class="tooltip">
-                <i class="fa-solid fa-info-circle" title="More information"></i>
-                <span></span>
+                <i class="fa-solid fa-info-circle" class="tooltip-icon"></i>
+                <span class="tooltip-text">
+                    <strong>Normal Mode</strong> : Measures typing speed and accuracy, allowing corrections without penalties. <br>
+                    <strong>Strict Mode</strong> : Every mistake counts, even if corrected later, affecting accuracy.
+                </span>
             </div>
             <select name="mode" id="">
-                <option value="Normal" title="Measures typing speed and accuracy, allowing corrections without penalties.">Normal</option>
-                <option value="Strict" title=" Every mistake counts, even if corrected later, affecting accuracy.">Strict</option>
+                <option value="Normal">Normal</option>
+                <option value="Strict">Strict</option>
             </select>
             
         </div>
