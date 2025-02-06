@@ -9,6 +9,15 @@ let replay = document.querySelector(".replay");
 let popup = document.querySelector(".popup");
 let overlay = document.querySelector(".overlay");
 
+let selectMenu = document.querySelector("select");
+let mode = "Normal";
+
+selectMenu.onchange = function(){
+    mode = selectMenu.value;
+    restart();
+}
+
+
 let started = false;
 let duration = 30;
 
@@ -29,7 +38,6 @@ let contents = ["The quick brown fox jumps over the lazy dog. Typing speed is an
 let text = contents[0];
 let i = 0
 changeText.onclick = function(){
-    console.log("clicked")
     i = (i+1) % contents.length;
     text = contents[i];
     textDiv.textContent = text;
@@ -53,21 +61,48 @@ function restart(){
     accuracySpan.textContent = "__";
     cursor = 0;
     correct = 0;
+    realCorrect = 0;
+    total = 0;
     lastFlag = true;
+    truthArr = [];
 }
 
 let cursor = 0;
 let correct = 0;
+let realCorrect = 0;
+let total = 0;
 let char;
 let lastFlag = true
 
-function finish(){
+function finishStrict(){
     clearInterval(interval);
-    let speed = (correct / 5) * (60 / duration);
-    let accuracy = (correct / input.value.length) * 100;
+    let speed = (realCorrect / 5) * (60 / duration);
+    let accuracy = (correct / total) * 100;
     input.blur();
     input.style.pointerEvents = "none";
-    // input.style.opacity = "0.7";
+    speedSpan.textContent = `${speed.toFixed(0)}`;
+    accuracySpan.textContent = `${accuracy.toFixed(0)}`;
+    overlay.style.display = "block";
+    popup.classList.remove("hidden");
+}
+function finishNormal(){
+    clearInterval(interval);
+    let finalInput = input.value;
+    let correctChars = 0;
+    for (let i = 0; i < finalInput.length; i++){
+        if (finalInput[i] === text[i]){
+            correctChars++;
+        }
+    }
+    let accuracy;
+    let speed = (correctChars / 5) * (60 / duration);
+    if (finalInput.length === 0){
+        accuracy = 0;
+    }else{
+        accuracy = (correctChars / finalInput.length) * 100;
+    }
+    input.blur();
+    input.style.pointerEvents = "none";
     speedSpan.textContent = `${speed.toFixed(0)}`;
     accuracySpan.textContent = `${accuracy.toFixed(0)}`;
     overlay.style.display = "block";
@@ -82,47 +117,50 @@ replay.onclick = function(){
 
 restartBtn.onclick = restart;
 
+let truthArr = [];
+
 input.oninput = function(event){
+    char = input.value.slice(-1);
     if (!started){
         started = true;
-        char = input.value;
-        if (char === text[cursor]){
-            correct++;
-            cursor++;
-            lastFlag = true;
-        }else{
-            cursor++;
-            lastFlag = false;
-        }
         interval = setInterval(function () {
             countSpan.textContent--;
             if (countSpan.textContent == 0){
-                finish();
+                if (mode === "Normal"){
+                    finishNormal();
+                }else{
+                    finishStrict();
+                }
             }
         }, 1000)
-    }else {
-        if (cursor === text.length){
-            finish();
-        }else if (event.inputType === "deleteContentBackward"){
-            if (lastFlag){
-                correct--;
-            }
-            cursor--;
+    }
+    if (event.inputType === "deleteContentBackward"){
+        if (truthArr.pop()){
+            realCorrect--;
+        }
+        cursor--;
+    }else{
+        total++;
+        if (char === text[cursor]){
+            realCorrect++;
+            correct++;
+            truthArr.push(true);
         }else{
-            char = input.value.slice(-1);
-            if (char === text[cursor]){
-                cursor++;
-                correct++;
-                lastFlag = true;
-            }else{
-                console.log("incorrect")
-                cursor++;
-                lastFlag = false;
-            }
+            // console.log("incorrect")
+            // console.log(`char = ${char} VS text[cursor] = ${text[cursor]}`)
+            truthArr.push(false);
+        }
+        cursor++;
+    }
+    
+    if (cursor === text.length){
+        if (mode === "Normal"){
+            finishNormal();
+        }else{
+            finishStrict();
         }
     }
-    if (cursor === text.length){
-        finish();
-    }
+    // console.log(`readCorrect = ${realCorrect} : correct = ${correct}`)
+    // console.log(truthArr)
 }
 
