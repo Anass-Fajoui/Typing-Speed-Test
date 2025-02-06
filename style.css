@@ -12,7 +12,7 @@ body{
 }
 header{
     background-color: var(--nice-blue);
-    height: 3rem;
+    height: 5rem;
     color: white;
     display: flex;
     padding: 20px 30px;
@@ -23,7 +23,7 @@ header{
     position: relative;
 }
 .title{
-    font-size: 20px;
+    font-size: 30px;
 }
 .select-container{
     position: absolute;
@@ -33,18 +33,20 @@ header{
 }
 select{
     margin-left: 5px;
-    font-size: 11px;
+    font-size: 15px;
     border: none;
     outline: none;
     border-radius: 5px;
 }
 .tooltip{
     position: relative;
+    font-size: 18px;
+
 }
 .tooltip-text{
     visibility: hidden;
     position: absolute;
-    font-size: 9px;
+    font-size: 12px;
     top: 100%;
     right: 0;
     transform: translateX(50%);
@@ -61,25 +63,25 @@ select{
     visibility: visible;
 }
 p{
-    margin-inline: auto;
-    font-size: 13px;
+    margin: 20px auto;
+    font-size: 20px;
     text-align: center;
     border-radius: 5px;
     background-color: white;
     padding: 0.5rem 1rem;
-    width: 30rem;
+    width: 50rem;
 }
 .buttons{
-    width: 30rem;
-    margin: 10px auto;
+    width: 50rem;
+    margin: 20px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .changeText{
-    font-size: 13px;
+    font-size: 18px;
     background-color: var(--nice-blue);
-    padding: 4px 8px;
+    padding: 5px 8px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
@@ -90,9 +92,9 @@ p{
 }
  .restart{
     width: fit-content;
-    font-size: 12px;
+    font-size: 18px;
     background-color: var(--nice-blue);
-    padding: 4px 8px;
+    padding: 5px 10px;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -112,24 +114,27 @@ p{
     margin-inline: auto;
 }
 input{
-    padding: 1rem 0.5rem;
+    padding: 1rem 1rem;
+    font-size: 18px;
+    border-radius: 5px;
     border: none;
     outline: none;
-    width: 30rem;
-    height: 2rem;
+    width: 50rem;
+    height: 3rem;
     border: 2px solid transparent;
 }
 input:focus{
     border: 2px solid var(--nice-blue);
 }
 .footer{
-    font-size: 12px;
-    width: 30rem;
+    font-size: 18px;
+    width: 50rem;
     margin-inline: auto;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
     align-items: center;
+    margin-top: -13px;
 }
 .speed, .accuracy, .counter{
     color: var(--nice-blue);
@@ -140,10 +145,10 @@ input:focus{
     align-items: center;
 }
 .duration-select *{
-    font-size: 12px;
-    padding: 3px 4px;
+    font-size: 18px;
+    padding: 5px 10px;
     text-align: center;
-    width: 25px;
+    /* width: 35px; */
     color: white;
     border-radius: 5px;
     background-color: #828181;
