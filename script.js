@@ -63,7 +63,7 @@ let lastFlag = true
 
 function finish(){
     clearInterval(interval);
-    let speed = (correct / 5) * (60/duration);
+    let speed = (correct / 5) * (60 / duration);
     let accuracy = (correct / input.value.length) * 100;
     input.blur();
     input.style.pointerEvents = "none";
