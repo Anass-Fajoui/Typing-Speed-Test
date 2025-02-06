@@ -51,6 +51,7 @@ let interval;
 
 function restart(){
     clearInterval(interval);
+    
     input.value = "";
     input.style.pointerEvents = "auto";
     input.style.opacity = "1";
@@ -65,6 +66,8 @@ function restart(){
     total = 0;
     lastFlag = true;
     truthArr = [];
+    updateBorder();
+
 }
 
 let cursor = 0;
@@ -106,7 +109,7 @@ function finishNormal(){
     speedSpan.textContent = `${speed.toFixed(0)}`;
     accuracySpan.textContent = `${accuracy.toFixed(0)}`;
     overlay.style.display = "block";
-    popup.classList.remove("hidden");
+    popup.classList.remove("hidden"); 
 }
 
 replay.onclick = function(){
@@ -149,6 +152,7 @@ input.oninput = function(event){
             // console.log("incorrect")
             // console.log(`char = ${char} VS text[cursor] = ${text[cursor]}`)
             truthArr.push(false);
+            
         }
         cursor++;
     }
@@ -160,7 +164,17 @@ input.oninput = function(event){
             finishStrict();
         }
     }
+    updateBorder();
+
     // console.log(`readCorrect = ${realCorrect} : correct = ${correct}`)
     // console.log(truthArr)
 }
 
+function updateBorder(){
+    if (truthArr.includes(false)){
+        input.classList.add("warning");
+    }else{
+        input.classList.remove("warning");
+    }
+}
+    

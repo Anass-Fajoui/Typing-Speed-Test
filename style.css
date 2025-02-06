@@ -113,9 +113,9 @@ p{
     width: fit-content;
     margin-inline: auto;
 }
-input{
+.input{
     padding: 1rem 1rem;
-    font-size: 18px;
+    font-size: 18px; 
     border-radius: 5px;
     border: none;
     outline: none;
@@ -123,8 +123,11 @@ input{
     height: 3rem;
     border: 2px solid transparent;
 }
-input:focus{
+.input:focus{
     border: 2px solid var(--nice-blue);
+}
+.warning:focus{
+    border: 2px solid #FFA500;
 }
 .footer{
     font-size: 18px;
@@ -163,7 +166,8 @@ input:focus{
     background-color: #eee;
     transition: 0.5s;
     border-radius: 5px;
-    padding: 20px;
+    font-size: 20px;
+    padding: 40px;
     z-index: 2;
     top: 50%;
     left: 50%;
@@ -180,7 +184,7 @@ input:focus{
     width: fit-content;
     padding: 5px;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-inline: auto;
     cursor: pointer;
     transition: 0.3s;
